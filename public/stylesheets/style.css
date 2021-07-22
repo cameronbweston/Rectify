@@ -13,9 +13,9 @@ html {
 
 /* resets font size to be 62.5% of the user preference - 
      in most browser configurations this will be 10px */
-:root {
+/* :root {
     font-size: 62.5%
-}
+} */
 
 body {
   background-color: gray;
