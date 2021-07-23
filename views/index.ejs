@@ -11,6 +11,23 @@
       >
     </div>
   <% } %>
+  <form action="/playlists/create" id="artistsForm">
+    <div class="mb-3">
+      <label for="artist1" class="form-label">Enter your favorite artist:</label>
+      <input type="text" class="form-control" name="artist1">
+    </div>
+    <div class="mb-3">
+      <label for="artist2" class="form-label">Enter an artist you've listened to lately:</label>
+      <input type="text" class="form-control" name="artist2">
+    </div>
+    <div class="mb-3">
+      <label for="artist3" class="form-label">Okay one more! An artist you've been vibing with:</label>
+      <input type="text" class="form-control" name="artist3">
+    </div>
+    <div class="col text-center">
+      <button type="submit" class="btn btn-primary mb-3">Submit</button>
+    </div>
+  </form>
 </main>
 
 <%- include('./partials/footer') %>

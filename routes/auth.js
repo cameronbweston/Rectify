@@ -7,18 +7,16 @@ export {
 
 const router = Router()
 
-router.get(
-  '/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] })
-)
+router.get('/spotify', passport.authenticate('spotify', { scope: ['user-read-email', 'user-read-private']}))
 
 router.get(
-  '/google/oauth2callback',
-  passport.authenticate('google', {
-    successRedirect: '/',
-    failureRedirect: '/auth/google',
-  })
-)
+  '/spotify/callback',
+  passport.authenticate('spotify', { failureRedirect: '/' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  }
+);
 
 router.get('/logout', function (req, res) {
   req.logout()

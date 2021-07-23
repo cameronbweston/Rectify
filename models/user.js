@@ -7,7 +7,7 @@ export {
 const userSchema = new mongoose.Schema(
   {
     email: String,
-    googleId: String,
+    spotifyId: String,
     profile: {type: mongoose.Schema.Types.ObjectId, ref: "Profile"}
   },
   {
