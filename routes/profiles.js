@@ -8,3 +8,4 @@ export {
 const router = Router()
 
 router.get('/friends', profilesCtrl.indexFriends)
+router.get('/user', profilesCtrl.showUser)

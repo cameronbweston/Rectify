@@ -1,7 +1,18 @@
 import { Profile } from '../models/profile.js'
 
 export {
-    indexFriends
+    indexFriends,
+    showUser
+}
+
+function showUser(req, res) {
+    Profile.findById(req.user.profile._id)
+    .then(profile => {
+        res.render('profiles/showUser', {
+            title: "My Profile",
+            profile
+        })
+    })
 }
 
 function indexFriends(req, res) {
