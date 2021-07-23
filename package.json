@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@coreui/coreui": "^4.0.1",
+    "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
     "debug": "^4.3.2",
     "dotenv": "^10.0.0",
