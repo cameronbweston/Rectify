@@ -1,12 +1,31 @@
 import mongoose from "mongoose";
 import axios from 'axios'
-import { resolveInclude } from "ejs";
+import { Playlist } from "../models/playlist.js";
 
 export {
-    create
+    create,
+    save
 }
 
 const playlistNames = ['In my feels', 'Rad Mix', 'Chill Day', 'Soul Soother']
+
+function save(req, res) {
+    let parsed = JSON.parse(req.body.playlist)
+
+    // Add id of the logged in user to req.body for creating a game for the first time (if it doesn't exist in the database)
+    req.body.savedBy = req.user.profile._id
+    req.body.songs = parsed
+    req.body.name = 'random playlist'
+    req.body.spotifyId = '' 
+
+    Playlist.create(req.body)
+    .then(() => {
+        res.redirect('/')
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
 
 function create(req, res) {
     console.log(req.query.firstArtist)

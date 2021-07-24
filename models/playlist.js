@@ -7,14 +7,17 @@ export {
 const Schema = mongoose.Schema
 
 const songSchema = new Schema({
+    songId: String,
+    name: String,
     artist: String,
-    songTitle: String
+    imageUrl: String
 })
 
 const playlistSchema = new Schema({
     name: String,
     songs: [songSchema],
-    SpotifyId: String
+    spotifyId: String,
+    savedBy: [{type: Schema.Types.ObjectId, ref:"Profile"}]
 }, {
     timestamps: true
 })
