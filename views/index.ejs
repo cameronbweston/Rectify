@@ -14,18 +14,18 @@
   <form action="/playlists/create" id="artistsForm">
     <div class="mb-3">
       <label for="artist1" class="form-label">Enter your favorite artist:</label>
-      <input type="text" class="form-control" >
+      <input type="text" class="form-control" name="firstArtist" required>
     </div>
     <div class="mb-3">
       <label for="artist2" class="form-label">Enter an artist you've listened to lately:</label>
-      <input type="text" class="form-control" >
+      <input type="text" class="form-control" name="secondArtist" required>
     </div>
     <div class="mb-3">
       <label for="artist3" class="form-label">Okay one more! An artist you've been vibing with:</label>
-      <input type="text" class="form-control" >
+      <input type="text" class="form-control" name="thirdArtist" required>
     </div>
     <div class="col text-center">
-      <button type="submit" class="btn btn-primary mb-3">Submit</button>
+      <button type="submit" class="btn btn-primary mb-3" form="artistsForm">Submit</button>
     </div>
   </form>
 </main>

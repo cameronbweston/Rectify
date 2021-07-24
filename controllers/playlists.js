@@ -6,18 +6,26 @@ export {
     create
 }
 
-const playlistNames = ['In my feels', 'Rad Mix', 'Bonkers', 'Soul Soother']
+const playlistNames = ['In my feels', 'Rad Mix', 'Chill Day', 'Soul Soother']
 
 function create(req, res) {
+    console.log(req.query.firstArtist)
+    let artist1 = req.query.firstArtist
+    let artist2 = req.query.secondArtist
+    let artist3 = req.query.thirdArtist
+    artist1.replace('/ /g', "%20")
+    artist2.replace('/ /g', "%20")
+    artist3.replace('/ /g', "%20")
+
     let reqHeaders = {
         headers: {
         Authorization: 'Bearer ' + process.env.ACCESS_TOKEN //the token is a variable which holds the token
         }
     }
     axios.all([
-        axios.get('https://api.spotify.com/v1/search?q=John%20Mayer&type=artist', reqHeaders),
-        axios.get('https://api.spotify.com/v1/search?q=Daft%20Punk&type=artist', reqHeaders),
-        axios.get('https://api.spotify.com/v1/search?q=Jim%20Croce&type=artist', reqHeaders)
+        axios.get(`https://api.spotify.com/v1/search?q=${artist1}&type=artist`, reqHeaders),
+        axios.get(`https://api.spotify.com/v1/search?q=${artist2}&type=artist`, reqHeaders),
+        axios.get(`https://api.spotify.com/v1/search?q=${artist3}&type=artist`, reqHeaders)
     ])
     .then(axios.spread((...responses) => {
         // console.log(responses[0].data.artists.items[0].id)
@@ -33,32 +41,34 @@ function create(req, res) {
 
         axios.get(`https://api.spotify.com/v1/recommendations?limit=10&market=ES&seed_artists=${artistIds[0]}%2C${artistIds[1]}%2C${artistIds[2]}`, reqHeaders)
         .then(listOfTracks => {
-            console.log(listOfTracks.data.tracks)
+            //console.log(listOfTracks.data.tracks)
 
             //Store our 10 song objects
             const recommendedRandomPlaylist = []
 
             listOfTracks.data.tracks.forEach(track => {
-                console.log(track.id)
-                console.log(`image url: ${track.album.images[0].url}`)
-                console.log(track.album.artists[0].name)
-                console.log(track.name)
+                // console.log(track.id)
+                // console.log(`image url: ${track.album.images[0].url}`)
+                // console.log(track.album.artists[0].name)
+                // console.log(track.name)
                 
                 let song = {
                     songId: track.id,
-                    songName: track.name,
-                    artistName: track.album.artists[0].name,
-                    imageUrl: track.album.images[0].url
+                    name: track.name,
+                    artist: track.album.artists[0].name,
+                    imageUrl: track.album.images[1].url
                 }
                 recommendedRandomPlaylist.push(song)
-
                 // res.render('playlists/showPlaylist', {
                 //     recommendedRandomPlaylist, 
                 // })
             })
+            return recommendedRandomPlaylist
         })
         .then(recommendedRandomPlaylist => {
+            //console.log(recommendedRandomPlaylist)
             res.render('playlists/showPlaylist', {
+                title: "Here is your new playlist! <3",
                 recommendedRandomPlaylist, 
             })
         })
