@@ -1,16 +1,18 @@
 import { Profile } from '../models/profile.js'
+import { Playlist } from '../models/playlist.js'
 
 export {
     indexFriends,
-    showUser}
+    showUser
+}
 
 
 function showUser(req, res) {
-    Profile.findById(req.user.profile._id)
-    .then(profile => {
+    Playlist.find({ savedBy: req.user.profile._id })
+    .then(playlists => {
         res.render('profiles/showUser', {
             title: "My Profile",
-            profile
+            playlists
         })
     })
 }

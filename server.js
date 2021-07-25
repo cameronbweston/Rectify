@@ -60,9 +60,6 @@ app.use(passport.session())
 
 // custom middleware
 app.use(passUserToView)
-//fetch or refresh access token
-// let resp = fetchAccessToken()
-// console.log(resp)
 
 // router middleware
 app.use('/', indexRouter)

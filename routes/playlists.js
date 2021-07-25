@@ -7,7 +7,7 @@ export {
 const router = Router()
 
 router.get('/create', isLoggedIn, playlistCtrl.create)
-router.post('/savePlaylist', playlistCtrl.save)
+router.post('/savePlaylist', isLoggedIn, playlistCtrl.save)
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) return next();

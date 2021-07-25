@@ -7,15 +7,17 @@ export {
     save
 }
 
-const playlistNames = ['In my feels', 'Rad Mix', 'Chill Day', 'Soul Soother']
+const playlistNames = ['In My Feels Playlist', 'Rad Mix Playlist', 'Chill Beats Playlist', 'Soul Soother Playlist', 'Pump Up Playlist', "Crunchy Grooves Playlist", 'Rainy Day Playlist', 'Awesome Day Playlist', 'Sad Girl Playlist', 'Happy Mood Playlist', 'Buttery Smooth Jams', 'Sonic Funk Jams']
+
+const playlistVerbs = ['To Dance To', 'To Cry To', 'To Beat The Depression', 'To Cure Anxiety', 'To Cook With', 'To Drive To', 'For the Gym', 'For Getting Over Your Ex', 'For Your Commute']
 
 function save(req, res) {
     let parsed = JSON.parse(req.body.playlist)
 
     // Add id of the logged in user to req.body for creating a game for the first time (if it doesn't exist in the database)
     req.body.savedBy = req.user.profile._id
+    req.body.name = req.body.title
     req.body.songs = parsed
-    req.body.name = 'random playlist'
     req.body.spotifyId = '' 
 
     Playlist.create(req.body)
@@ -75,20 +77,22 @@ function create(req, res) {
                     songId: track.id,
                     name: track.name,
                     artist: track.album.artists[0].name,
-                    imageUrl: track.album.images[1].url
+                    mediumImage: track.album.images[1].url
                 }
                 recommendedRandomPlaylist.push(song)
-                // res.render('playlists/showPlaylist', {
-                //     recommendedRandomPlaylist, 
-                // })
             })
             return recommendedRandomPlaylist
         })
         .then(recommendedRandomPlaylist => {
             //console.log(recommendedRandomPlaylist)
+
+            //Generate a rad playlist name
+            const randomPlaylistName = playlistNames[Math.floor(Math.random()*playlistNames.length)] + " " + playlistVerbs[Math.floor(Math.random()*playlistVerbs.length)]
+
             res.render('playlists/showPlaylist', {
                 title: "Here is your new playlist! <3",
                 recommendedRandomPlaylist, 
+                randomPlaylistName
             })
         })
     })

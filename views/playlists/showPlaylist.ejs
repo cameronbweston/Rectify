@@ -11,15 +11,16 @@
       >
     </div>
   <% } %>
-  <h4>Not Satisfied? Ctrl+R to Refresh</h4>
   <h4>Love it? Save it!</h4>
   <form action="/playlists/savePlaylist" method="POST">
-     <input type="text" name="playlist" value="<%= JSON.stringify(recommendedRandomPlaylist)%>"> 
+     <input type="text" name="playlist" hidden value="<%= JSON.stringify(recommendedRandomPlaylist)%>"> 
+     <input type="text" name="title"  hidden value="<%= randomPlaylistName %>">
      <button type="submit" class="btn btn-dark">Save to Profile</button>
   </form>  
+  <h2><%= randomPlaylistName %></h2>
   <ul class="list-group">
       <% recommendedRandomPlaylist.forEach(song => { %>
-        <li class="list-group-item"><img src="<%= song.imageUrl %>" alt=""><%= song.name %> - <%= song.artist %> </li>
+        <li class="list-group-item"><img src="<%= song.mediumImage %>" alt=""><%= song.name %> - <%= song.artist %> </li>
       <% }) %>
   </ul>
 </main>

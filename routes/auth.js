@@ -16,8 +16,6 @@ router.get(
   function(req, res) {
     // Successful authentication, redirect home.
     process.env.USER_CODE = req.query.code
-    //console.log(`user code: ${process.env.USER_CODE}`)
-    //console.log(`request: ${req.query.code} response: ${res.body}`)
     res.redirect('/');
   }
 );

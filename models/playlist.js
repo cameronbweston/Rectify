@@ -10,7 +10,7 @@ const songSchema = new Schema({
     songId: String,
     name: String,
     artist: String,
-    imageUrl: String
+    mediumImage: String,
 })
 
 const playlistSchema = new Schema({

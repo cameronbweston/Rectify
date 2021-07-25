@@ -3,7 +3,29 @@
 
 
 <main>
-
+<h1>My Playlists</h1>
+<table class="table table-light">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Playlist Name</th>
+        <th scope="col">Songs</th>
+        <th scope="col">Date-Created</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <% for( let index = 0; index < playlists.length; index++ ) { %>
+            <tr>
+                <th scope="row"><%= index+1 %></th>
+                <td><%= playlists[index].name %> </td>
+                <td>10</td>
+                <td><%= playlists[index].createdAt.toLocaleDateString() %></td>
+                <td><button>Details</button></td>
+                <% } %>
+            </tr>
+    </tbody>
+  </table>
 
 </main>
 
