@@ -4,12 +4,35 @@ import { Playlist } from "../models/playlist.js";
 
 export {
     create,
-    save
+    save,
+    details,
+    deletePlaylist as delete
 }
 
 const playlistNames = ['In My Feels Playlist', 'Rad Mix Playlist', 'Chill Beats Playlist', 'Soul Soother Playlist', 'Pump Up Playlist', "Crunchy Grooves Playlist", 'Rainy Day Playlist', 'Awesome Day Playlist', 'Sad Girl Playlist', 'Happy Mood Playlist', 'Buttery Smooth Jams', 'Sonic Funk Jams']
 
 const playlistVerbs = ['To Dance To', 'To Cry To', 'To Beat The Depression', 'To Cure Anxiety', 'To Cook With', 'To Drive To', 'For the Gym', 'For Getting Over Your Ex', 'For Your Commute']
+
+function deletePlaylist(req, res) {
+    Playlist.findByIdAndDelete(req.params.id)
+    .then(( ) => {
+        res.redirect(`/playlist/details${req.params.id}`)
+    })
+    .catch(err => {
+        console.log(err)
+        res.redirect(`/playlist/details${req.params.id}`)
+    })
+}
+
+function details(req, res) {
+    Playlist.findById(req.params.id)
+    .then(playlist => {
+        res.render('playlists/details', {
+            title: playlist.name,
+            playlist
+        })
+    })
+}
 
 function save(req, res) {
     let parsed = JSON.parse(req.body.playlist)

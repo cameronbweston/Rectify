@@ -1,0 +1,17 @@
+<%- include('../partials/html-head') %>
+<%- include('../partials/nav') %>
+
+<main>
+  <h4>Sick of It? Delete It</h4>
+  <form action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">
+     <button type="submit" class="btn btn-dark">Delete</button>
+  </form>  
+  <h2><%= playlist.name %></h2>
+  <ul class="list-group">
+      <% playlist.songs.forEach(song => { %>
+        <li class="list-group-item"><img src="<%= song.mediumImage %>" alt=""><%= song.name %> - <%= song.artist %> </li>
+      <% }) %>
+  </ul>
+</main>
+
+<%- include('../partials/footer') %>
