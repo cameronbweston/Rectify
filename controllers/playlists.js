@@ -16,11 +16,19 @@ const playlistVerbs = ['To Dance To', 'To Cry To', 'To Beat The Depression', 'To
 function deletePlaylist(req, res) {
     Playlist.findByIdAndDelete(req.params.id)
     .then(( ) => {
-        res.redirect(`/playlist/details${req.params.id}`)
+        Playlist.find({ savedBy: req.user.profile._id })
+        .then(playlists => {
+            res.render(`profiles/showUser`,{
+                title: "My Profile",
+                playlists
+            })
+        })
     })
     .catch(err => {
         console.log(err)
-        res.redirect(`/playlist/details${req.params.id}`)
+        res.render(`playlists/details`, {
+            title: "My Profile"
+        })
     })
 }
 
