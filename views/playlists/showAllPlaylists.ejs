@@ -16,10 +16,17 @@
     </thead>
     <tbody>
         <% for( let index = 0; index < playlists.length; index++ ) { %>
+          <% var trackCount = 0 %>
             <tr>
                 <th scope="row"><%= index+1 %></th>
                 <td><%= playlists[index].name %> </td>
-                <td>10</td>
+                <td>
+                  <% playlists[index].songs.forEach(element => { %>
+                    <% trackCount++ %>
+                    <% }) %> 
+                  <%= trackCount %> 
+                  <% trackCount = 0 %> 
+                </td>
                 <td><%= playlists[index].createdAt.toLocaleDateString() %></td>
                 <td>
                     <form action="/playlists/details/<%= playlists[index]._id %> " method="GET">
