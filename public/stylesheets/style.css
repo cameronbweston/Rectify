@@ -1,6 +1,9 @@
+html {
+  box-sizing: border-box
+}
+
 * {
   font-family: 'Quicksand', sans-serif;
-  box-sizing: border-box
 }
 
 /* The Universal Selector */
