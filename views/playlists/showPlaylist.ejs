@@ -15,7 +15,7 @@
   <form action="/playlists/AddToUserSpotify" method="POST">
     <input type="text" name="playlistName" hidden value="<%= randomPlaylistName %>"> 
     <input type="text" name="playlist" hidden value="<%= JSON.stringify(recommendedRandomPlaylist)%>"> 
-      <button>+ Add to Spotify</button>
+      <button class="btn btn-dark">+ Add to Spotify</button>
   </form>
   <h2 id="playlistName"><%= randomPlaylistName %></h2>
   <ul class="list-group">
