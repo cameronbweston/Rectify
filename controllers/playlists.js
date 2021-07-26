@@ -17,6 +17,7 @@ export {
 }
 
 function addToUserSpotify (req, res) {
+    const originalReq = req
     const spotifyId = req.user.spotifyId
     const songsToAdd = JSON.parse(req.body.playlist)
     const playlistName = req.body.playlistName
@@ -56,6 +57,9 @@ function addToUserSpotify (req, res) {
         }
         console.log(`body url: ${trackURIString}`)
         axios.post(`https://api.spotify.com/v1/playlists/${newPlaylistId}/tracks?uris=spotify%3Atrack%3A${trackURIString}`, { }, reqHeaders)
+        .then(() => {
+            save(originalReq)
+        })
         .then(() => {
             res.render('index', {
                 title: "Home Page"
@@ -106,22 +110,22 @@ function details(req, res) {
     })
 }
 
-function save(req, res) {
+function save(req) {
     let parsed = JSON.parse(req.body.playlist)
 
     // Add id of the logged in user to req.body for creating a game for the first time (if it doesn't exist in the database)
     req.body.savedBy = req.user.profile._id
-    req.body.name = req.body.title
+    req.body.name = req.body.playlistName
     req.body.songs = parsed
     req.body.spotifyId = '' 
 
     Playlist.create(req.body)
-    .then(() => {
-        res.redirect('/')
-    })
-    .catch(err => {
-        console.log(err)
-    })
+    // .then(() => {
+    //     res.redirect('/')
+    // })
+    // .catch(err => {
+    //     console.log(err)
+    // })
 }
 
 function create(req, res) {
