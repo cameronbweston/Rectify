@@ -42,3 +42,29 @@ main {
 h1 {
   font-size: 3.6rem;
 }
+
+#artistsForm {
+  color: white;
+  background-color: #343A40;
+  margin: 1%;
+  padding: 1%;
+  border-radius: 10px;
+}
+
+#albumArt {
+  height: 30%;
+  width: 30%;
+  border-radius: 5px;
+}
+
+#songRow {
+  font-size: 20px;
+  margin: 0;
+}
+
+#playlistName {
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+}

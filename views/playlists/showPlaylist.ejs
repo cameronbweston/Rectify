@@ -3,24 +3,24 @@
 
 <main>
   <h1>hello, <%= user ? user.profile.name : "friend" %></h1>
-  <% if (user?.profile.avatar) { %>
+  <!-- //<% if (user?.profile.avatar) { %>
     <div>
       <img 
-        src="<%= user.profile.avatar %>" 
-        alt="<%= user.profile.name %> avatar"
+        //src="<%= user.profile.avatar %>" 
+        //alt="<%= user.profile.name %> avatar"
       >
     </div>
-  <% } %>
+  //<% } %> -->
   <h4>Love it? Save it!</h4>
   <form action="/playlists/AddToUserSpotify" method="POST">
     <input type="text" name="playlistName" hidden value="<%= randomPlaylistName %>"> 
     <input type="text" name="playlist" hidden value="<%= JSON.stringify(recommendedRandomPlaylist)%>"> 
       <button>+ Add to Spotify</button>
   </form>
-  <h2><%= randomPlaylistName %></h2>
+  <h2 id="playlistName"><%= randomPlaylistName %></h2>
   <ul class="list-group">
       <% recommendedRandomPlaylist.forEach(song => { %>
-        <li class="list-group-item"><img src="<%= song.mediumImage %>" alt=""><%= song.name %> - <%= song.artist %> </li>
+        <li class="list-group-item" id="songRow"><img id="albumArt" src="<%= song.mediumImage %>" alt=""><%= song.name %> - <%= song.artist %></li>
       <% }) %>
   </ul>
 </main>
