@@ -1,18 +1,71 @@
 import mongoose from "mongoose";
 import axios from 'axios'
 import { Playlist } from "../models/playlist.js";
+import { User } from "../models/user.js";
+
+const playlistNames = ['In My Feels Playlist', 'Rad Mix Playlist', 'Chill Beats Playlist', 'Soul Soother Playlist', 'Pump Up Playlist', "Crunchy Grooves Playlist", 'Rainy Day Playlist', 'Awesome Day Playlist', 'Sad Girl Playlist', 'Happy Mood Playlist', 'Buttery Smooth Jams', 'Sonic Funk Jams']
+
+const playlistVerbs = ['To Dance To', 'To Cry To', 'To Beat The Depression', 'To Cure Anxiety', 'To Cook With', 'To Drive To', 'For the Gym', 'For Getting Over Your Ex', 'For Your Commute']
 
 export {
     create,
     save,
     details,
     deletePlaylist as delete,
-    showAllPlaylists
+    showAllPlaylists,
+    addToUserSpotify
 }
 
-const playlistNames = ['In My Feels Playlist', 'Rad Mix Playlist', 'Chill Beats Playlist', 'Soul Soother Playlist', 'Pump Up Playlist', "Crunchy Grooves Playlist", 'Rainy Day Playlist', 'Awesome Day Playlist', 'Sad Girl Playlist', 'Happy Mood Playlist', 'Buttery Smooth Jams', 'Sonic Funk Jams']
+function addToUserSpotify (req, res) {
+    const spotifyId = req.user.spotifyId
+    const songsToAdd = JSON.parse(req.body.playlist)
+    const playlistName = req.body.playlistName
+    const trackIds = []
+    
+    //console.log(`user: ${req.user}`)
+    songsToAdd.forEach(track => {
+        trackIds.push(track.songId)
+    })
+    //console.log(`trackIds: ${trackIds}`)
 
-const playlistVerbs = ['To Dance To', 'To Cry To', 'To Beat The Depression', 'To Cure Anxiety', 'To Cook With', 'To Drive To', 'For the Gym', 'For Getting Over Your Ex', 'For Your Commute']
+    const reqHeaders = {
+        headers: {
+        Authorization: 'Bearer ' + process.env.ACCESS_TOKEN //the token is a variable which holds the token
+        }
+    }
+
+    const makePlaylistBody = {
+        "name": "Rectify - " + playlistName,
+        "description": "Your recommended songs from Rectify",
+        "public": false
+    }
+
+    axios.post(`https://api.spotify.com/v1/users/${spotifyId}/playlists`, makePlaylistBody, reqHeaders)
+    .then((response) => {
+        let newPlaylistId = response.data.id
+        let trackURIString = ''
+        
+        for (let i = 0; i < trackIds.length; i++) {
+            if(i == trackIds.length - 1){
+                trackURIString += trackIds[i]
+            }
+            else {
+                trackURIString += trackIds[i]
+                trackURIString += '%2Cspotify%3Atrack%3A'
+            }
+        }
+        console.log(`body url: ${trackURIString}`)
+        axios.post(`https://api.spotify.com/v1/playlists/${newPlaylistId}/tracks?uris=spotify%3Atrack%3A${trackURIString}`, { }, reqHeaders)
+        .then(() => {
+            res.render('index', {
+                title: "Home Page"
+            })
+        })
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
 
 function showAllPlaylists(req, res) {
     Playlist.find({ savedBy: req.user.profile._id })
@@ -102,7 +155,7 @@ function create(req, res) {
     }))
     .then((artistIds) => {
 
-        axios.get(`https://api.spotify.com/v1/recommendations?limit=10&market=ES&seed_artists=${artistIds[0]}%2C${artistIds[1]}%2C${artistIds[2]}`, reqHeaders)
+        axios.get(`https://api.spotify.com/v1/recommendations?limit=15&market=ES&seed_artists=${artistIds[0]}%2C${artistIds[1]}%2C${artistIds[2]}`, reqHeaders)
         .then(listOfTracks => {
             //console.log(listOfTracks.data.tracks)
 

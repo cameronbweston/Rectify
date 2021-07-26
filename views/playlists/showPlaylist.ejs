@@ -17,6 +17,11 @@
      <input type="text" name="title"  hidden value="<%= randomPlaylistName %>">
      <button type="submit" class="btn btn-dark">Save to Profile</button>
   </form>  
+  <form action="/playlists/AddToUserSpotify" method="POST">
+    <input type="text" name="playlistName" hidden value="<%= randomPlaylistName %>"> 
+    <input type="text" name="playlist" hidden value="<%= JSON.stringify(recommendedRandomPlaylist)%>"> 
+      <button>+ Add to Spotify</button>
+  </form>
   <h2><%= randomPlaylistName %></h2>
   <ul class="list-group">
       <% recommendedRandomPlaylist.forEach(song => { %>

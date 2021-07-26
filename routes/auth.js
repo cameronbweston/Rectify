@@ -8,7 +8,7 @@ export {
 const router = Router()
 
 
-router.get('/spotify', passport.authenticate('spotify', { scope: ['user-read-email', 'user-read-private']}))
+router.get('/spotify', passport.authenticate('spotify', { scope: ['user-read-email', 'user-read-private', 'playlist-modify-public', 'playlist-modify-private']}))
 
 router.get(
   '/spotify/callback',
