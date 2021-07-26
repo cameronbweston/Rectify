@@ -20,7 +20,7 @@
   <h2 id="playlistName"><%= randomPlaylistName %></h2>
   <ul class="list-group">
       <% recommendedRandomPlaylist.forEach(song => { %>
-        <li class="list-group-item" id="songRow"><img id="albumArt" src="<%= song.mediumImage %>" alt=""><%= song.name %> - <%= song.artist %></li>
+        <li class="list-group-item" id="songRow"><img id="albumArt" src="<%= song.mediumImage %>" alt="album cover"><span >&#8193</span><%= song.name %> - <%= song.artist %></li>
       <% }) %>
   </ul>
 </main>

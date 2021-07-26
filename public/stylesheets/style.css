@@ -52,13 +52,13 @@ h1 {
 }
 
 #albumArt {
-  height: 30%;
-  width: 30%;
+  height: 25%;
+  width: 25%;
   border-radius: 5px;
 }
 
 #songRow {
-  font-size: 20px;
+  font-size: 22px;
   margin: 0;
 }
 
