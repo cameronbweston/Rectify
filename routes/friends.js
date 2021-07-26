@@ -1,14 +1,13 @@
 import { Router } from "express";
-import * as profilesCtrl from '../controllers/profiles.js'
-
+import * as friendsCtrl from '../controllers/friends.js'
+import { Profile } from "../models/profile.js";
 export {
     router
 }
 
 const router = Router()
 
-router.get('/friends', isLoggedIn, profilesCtrl.indexFriends)
-router.get('/show', isLoggedIn, profilesCtrl.showUser)
+router.get('/', isLoggedIn, friendsCtrl.indexFriends)
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) return next();

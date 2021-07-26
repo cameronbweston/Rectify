@@ -6,19 +6,30 @@ export {
     create,
     save,
     details,
-    deletePlaylist as delete
+    deletePlaylist as delete,
+    showAllPlaylists
 }
 
 const playlistNames = ['In My Feels Playlist', 'Rad Mix Playlist', 'Chill Beats Playlist', 'Soul Soother Playlist', 'Pump Up Playlist', "Crunchy Grooves Playlist", 'Rainy Day Playlist', 'Awesome Day Playlist', 'Sad Girl Playlist', 'Happy Mood Playlist', 'Buttery Smooth Jams', 'Sonic Funk Jams']
 
 const playlistVerbs = ['To Dance To', 'To Cry To', 'To Beat The Depression', 'To Cure Anxiety', 'To Cook With', 'To Drive To', 'For the Gym', 'For Getting Over Your Ex', 'For Your Commute']
 
+function showAllPlaylists(req, res) {
+    Playlist.find({ savedBy: req.user.profile._id })
+    .then(playlists => {
+        res.render('playlists/showAllPlaylists', {
+            title: "My Profile",
+            playlists
+        })
+    })
+}
+
 function deletePlaylist(req, res) {
     Playlist.findByIdAndDelete(req.params.id)
     .then(( ) => {
         Playlist.find({ savedBy: req.user.profile._id })
         .then(playlists => {
-            res.render(`profiles/showUser`,{
+            res.render(`playlists/showAllPlaylists`,{
                 title: "My Profile",
                 playlists
             })

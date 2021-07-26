@@ -21,7 +21,7 @@ import('./config/passport.js')
 // require routes
 import { router as indexRouter } from './routes/index.js'
 import { router as authRouter } from './routes/auth.js'
-import { router as profilesRouter } from './routes/profiles.js'
+import { router as friendsRouter } from './routes/friends.js'
 import { router as playlistsRouter } from './routes/playlists.js'
 
 // view engine setup
@@ -64,7 +64,7 @@ app.use(passUserToView)
 // router middleware
 app.use('/', indexRouter)
 app.use('/auth', authRouter)
-app.use('/profiles', profilesRouter)
+app.use('/friends', friendsRouter)
 app.use('/playlists', playlistsRouter)
 
 // catch 404 and forward to error handler
