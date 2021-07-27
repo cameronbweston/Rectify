@@ -7,6 +7,7 @@ export {
 
 const router = Router()
 
+router.get('/:id', isLoggedIn, friendsCtrl.details)
 router.get('/', isLoggedIn, friendsCtrl.indexFriends)
 
 function isLoggedIn(req, res, next) {
