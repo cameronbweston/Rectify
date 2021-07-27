@@ -63,7 +63,7 @@ function details(req, res) {
 function indexFriends(req, res) {
     Profile.find({})
     .then(profiles => {
-        res.render('friends/indexFriends', {
+        res.render('friends/index', {
             title: "Add some friends",
             profiles
         })

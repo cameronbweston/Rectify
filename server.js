@@ -23,6 +23,7 @@ import { router as indexRouter } from './routes/index.js'
 import { router as authRouter } from './routes/auth.js'
 import { router as friendsRouter } from './routes/friends.js'
 import { router as playlistsRouter } from './routes/playlists.js'
+import { router as profilesRouter } from './routes/profiles.js'
 
 // view engine setup
 app.set(
@@ -66,6 +67,7 @@ app.use('/', indexRouter)
 app.use('/auth', authRouter)
 app.use('/friends', friendsRouter)
 app.use('/playlists', playlistsRouter)
+app.use('/profiles', profilesRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -81,27 +83,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500)
   res.render('error')
 })
-
-// function fetchAccessToken() {
-//     // method: "POST",
-//     // url: "https://accounts.spotify.com/api/token",
-//   let body = `grant_type=authorization_code&code=${process.env.USER_CODE}&redirect_uri=${process.env.SPOTIFY_CALLBACK}&client_id=${process.env.SPOTIFY_CLIENT_ID}&client_secret${process.env.SPOTIFY_SECRET}`
-
-//   //POST request for token
-//   app.post('https://accounts.spotify.com/api/token' + body, function(req, res) {
-//     req.header = 
-//     console.log(req.query)
-//     //console.log(res.body)
-//     return req.body
-//   })
-// }
-
-// function AuthorizationApi(body) {
-
-// }
-
-// function handleAuthorization() {
-
-// }
 
 export { app }
