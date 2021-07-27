@@ -1,12 +1,13 @@
 import { Router } from "express";
 import * as friendsCtrl from '../controllers/friends.js'
-import { Profile } from "../models/profile.js";
+
 export {
     router
 }
 
 const router = Router()
 
+router.get('/remove/:id', isLoggedIn, friendsCtrl.remove)
 router.get('/add/:id', isLoggedIn, friendsCtrl.add)
 router.get('/:id', isLoggedIn, friendsCtrl.details)
 router.get('/', isLoggedIn, friendsCtrl.indexFriends)

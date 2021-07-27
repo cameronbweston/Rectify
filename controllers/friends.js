@@ -5,9 +5,24 @@ import { Playlist } from '../models/playlist.js'
 export {
     indexFriends,
     details,
-    add
+    add,
+    remove
 }
 
+function remove(req, res) {
+    Profile.findById(req.user.profile)
+    .then(profile => {
+      profile.friends.remove(req.params.id)
+      profile.save()
+      .then(()=> {
+        res.redirect(`/friends/${req.params.id}`)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      res.redirect('/')
+    })
+}
 
 function add(req, res) {
     Profile.findById(req.user.profile)
@@ -25,14 +40,18 @@ function add(req, res) {
   }
 
 function details(req, res) {
-    Profile.findById(req.params.id)
-    .then(profile => {
-        Playlist.find({ savedBy: req.params.id })
-        .then(playlists => {
-            res.render('friends/details', {
-                title: 'Profile Details',
-                profile,
-                playlists
+    Profile.findById(req.user.profile._id)
+    .then(userProfile => {
+        Profile.findById(req.params.id)
+        .then(profile => {
+            Playlist.find({ savedBy: req.params.id })
+            .then(playlists => {
+                res.render('friends/details', {
+                    title: 'Profile Details',
+                    profile,
+                    playlists,
+                    userProfile
+                })
             })
         })
     })

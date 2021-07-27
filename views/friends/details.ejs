@@ -12,9 +12,20 @@
     </div>
   <% } %>
   <h1>Saved Playlists</h1>
-  <form action="/friends/add/<%= profile.id %> ">
-        <button type="submit">+ Add Friend</button>
-  </form>
+
+  <%# This is where we'll add a button to 'friend/unfriend' a user %> 
+  <%# if this is not my profile page          &&  the user being viewed is not in my friends list %> 
+  <% if (!profile._id.equals(userProfile._id) && !userProfile.friends.includes(profile._id)) { %>
+    <a href="/friends/add/<%= profile._id %>" class="btn btn-dark">
+      + Add Friend
+    </a>
+  <% } %>
+  <%# if this is not my profile page          &&  the user being viewed is in my friends list %> 
+  <% if (!profile._id.equals(userProfile._id) && userProfile.friends.includes(profile._id)) { %>
+    <a href="/friends/remove/<%= profile._id %>" class="btn btn-dark">
+      Remove Friend
+    </a>
+  <% } %>
 <table class="table table-light">
     <thead class="thead-dark">
       <tr>
