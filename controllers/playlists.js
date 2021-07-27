@@ -120,12 +120,6 @@ function save(req) {
     req.body.spotifyId = '' 
 
     Playlist.create(req.body)
-    // .then(() => {
-    //     res.redirect('/')
-    // })
-    // .catch(err => {
-    //     console.log(err)
-    // })
 }
 
 function create(req, res) {
@@ -199,9 +193,5 @@ function create(req, res) {
         console.log(err)
         //res.redirect('/')
     })
-
-}
-
-function findSpotifyArtistIds() {
 
 }

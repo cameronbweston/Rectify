@@ -12,6 +12,9 @@
     </div>
   <% } %>
   <h1>Saved Playlists</h1>
+  <form action="/friends/add/<%= profile.id %> ">
+        <button type="submit">+ Add Friend</button>
+  </form>
 <table class="table table-light">
     <thead class="thead-dark">
       <tr>
@@ -19,7 +22,6 @@
         <th scope="col">Playlist Name</th>
         <th scope="col">Songs</th>
         <th scope="col">Date-Created</th>
-        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -36,11 +38,6 @@
                   <% trackCount = 0 %> 
                 </td>
                 <td><%= playlists[index].createdAt.toLocaleDateString() %></td>
-                <td>
-                    <form action="/playlists/details/<%= playlists[index]._id %> " method="GET">
-                    <button type="submit">Details</button>
-                    </form>
-                </td>
                 <% } %>
             </tr>
     </tbody>

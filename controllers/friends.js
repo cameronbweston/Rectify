@@ -4,8 +4,25 @@ import { Playlist } from '../models/playlist.js'
 
 export {
     indexFriends,
-    details
+    details,
+    add
 }
+
+
+function add(req, res) {
+    Profile.findById(req.user.profile)
+    .then(profile => {
+      profile.friends.push(req.params.id)
+      profile.save()
+      .then(()=> {
+        res.redirect(`/friends/${req.params.id}`)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      res.redirect('/')
+    })
+  }
 
 function details(req, res) {
     Profile.findById(req.params.id)
