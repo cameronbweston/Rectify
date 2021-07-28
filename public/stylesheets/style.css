@@ -57,6 +57,11 @@ h1 {
   border-radius: 100%;
 }
 
+#spotifyButton {
+  margin: auto;
+  font-size: 20px;
+}
+
 #artistsForm {
   color: white;
   background-color: #343A40;
