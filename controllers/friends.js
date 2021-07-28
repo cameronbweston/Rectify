@@ -61,11 +61,13 @@ function details(req, res) {
 }
 
 function indexFriends(req, res) {
-    Profile.find({})
-    .then(profiles => {
+    Profile.findById(req.user.profile._id)
+    .populate('friends')
+    .then(profile => {
+        console.log(profile)
         res.render('friends/index', {
-            title: "Add some friends",
-            profiles
+            title: "My Friends",
+            profile
         })
     })
 }

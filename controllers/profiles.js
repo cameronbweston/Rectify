@@ -8,7 +8,7 @@ export {
 function index(req, res) {
     Profile.find({})
     .then(profiles => {
-        res.render('friends/index', {
+        res.render('profiles/index', {
             title: "All Profiles",
             profiles
         })
