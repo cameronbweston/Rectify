@@ -64,7 +64,6 @@ function indexFriends(req, res) {
     Profile.findById(req.user.profile._id)
     .populate('friends')
     .then(profile => {
-        console.log(profile)
         res.render('friends/index', {
             title: "My Friends",
             profile

@@ -102,10 +102,14 @@ function deletePlaylist(req, res) {
 
 function details(req, res) {
     Playlist.findById(req.params.id)
+    .populate('savedBy')
     .then(playlist => {
+        console.log(playlist)
+        console.log(req.user)
         res.render('playlists/details', {
             title: playlist.name,
-            playlist
+            playlist,
+            user: req.user
         })
     })
 }
