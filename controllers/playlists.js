@@ -134,6 +134,8 @@ function create(req, res) {
     let artist1 = req.query.firstArtist
     let artist2 = req.query.secondArtist
     let artist3 = req.query.thirdArtist
+    let numberOfTracks = req.query.numberOfTracks ? req.query.numberOfTracks : 15
+
     artist1.replace('/ /g', "%20")
     artist2.replace('/ /g', "%20")
     artist3.replace('/ /g', "%20")
@@ -159,8 +161,7 @@ function create(req, res) {
         return artistIds
     }))
     .then((artistIds) => {
-
-        axios.get(`https://api.spotify.com/v1/recommendations?limit=15&market=ES&seed_artists=${artistIds[0]}%2C${artistIds[1]}%2C${artistIds[2]}`, reqHeaders)
+        axios.get(`https://api.spotify.com/v1/recommendations?limit=${numberOfTracks}&market=ES&seed_artists=${artistIds[0]}%2C${artistIds[1]}%2C${artistIds[2]}`, reqHeaders)
         .then(listOfTracks => {
             //console.log(listOfTracks.data.tracks)
 
