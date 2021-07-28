@@ -12,10 +12,10 @@
        <button type="submit" class="btn btn-dark">Delete</button>
     </form>  
   <% } %>
-  <h2><%= playlist.name %></h2>
+  <h2 class="playlistName"><%= playlist.name %></h2>
   <ul class="list-group">
       <% playlist.songs.forEach(song => { %>
-        <li class="list-group-item"><img src="<%= song.mediumImage %>" alt=""><%= song.name %> - <%= song.artist %> </li>
+        <li class="list-group-item songRow"><img  class="albumArt" src="<%= song.mediumImage %>" alt=""><span >&#8193</span><%= song.name %> - <%= song.artist %> </li>
       <% }) %>
   </ul>
 </main>
