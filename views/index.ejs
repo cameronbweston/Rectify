@@ -5,9 +5,11 @@
   <h1>hello, <%= user ? user.profile.name : "friend" %></h1>
   <% if (user?.profile.avatar) { %>
     <div>
-      <img 
+      <img
         src="<%= user.profile.avatar %>" 
         alt="<%= user.profile.name %> avatar"
+        
+        id="userImg"
       >
     </div>
   <% } %>
