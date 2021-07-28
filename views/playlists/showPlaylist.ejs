@@ -2,14 +2,13 @@
 <%- include('../partials/nav') %>
 
 <main>
-  <h1 class="whiteHeaders">hello, <%= user ? user.profile.name : "friend" %></h1>
+  <h2 class="playlistName"><%= randomPlaylistName %></h2>
   <h4 class="whiteHeaders">Love it? Save it!</h4>
   <form action="/playlists/AddToUserSpotify" method="POST">
     <input type="text" name="playlistName" hidden value="<%= randomPlaylistName %>"> 
     <input type="text" name="playlist" hidden value="<%= JSON.stringify(recommendedRandomPlaylist)%>"> 
       <button class="btn btn-dark">+ Add to Spotify</button>
   </form>
-  <h2 class="playlistName"><%= randomPlaylistName %></h2>
   <ul class="list-group">
       <% recommendedRandomPlaylist.forEach(song => { %>
         <li class="list-group-item songRow"><img class="albumArt" src="<%= song.mediumImage %>" alt="album cover"><span >&#8193</span><%= song.name %> - <%= song.artist %></li>

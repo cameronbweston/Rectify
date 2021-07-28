@@ -48,14 +48,18 @@ h1 {
 }
 
 .playlistTable {
-  width: 80em;
+  width: 80%;
+}
+
+#playlistSubmitButton {
+  margin: 1em;
 }
 
 #addFriendButton{
   margin: 1em;
 }
 
-#vibeHeader {
+.titleHeader {
 margin-top: 1em;
 }
 
