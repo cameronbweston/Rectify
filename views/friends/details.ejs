@@ -6,6 +6,7 @@
   <% if (profile?.avatar) { %>
     <div>
       <img 
+      class="img-thumbnail"
         src="<%= profile.avatar %>" 
         alt="<%= profile.name %> avatar"
       >
@@ -16,17 +17,17 @@
   <%# This is where we'll add a button to 'friend/unfriend' a user %> 
   <%# if this is not my profile page          &&  the user being viewed is not in my friends list %> 
   <% if (!profile._id.equals(userProfile._id) && !userProfile.friends.includes(profile._id)) { %>
-    <a href="/friends/add/<%= profile._id %>" class="btn btn-dark">
+    <a href="/friends/add/<%= profile._id %>" class="btn btn-dark" id="addFriendButton">
       + Add Friend
     </a>
   <% } %>
   <%# if this is not my profile page          &&  the user being viewed is in my friends list %> 
   <% if (!profile._id.equals(userProfile._id) && userProfile.friends.includes(profile._id)) { %>
-    <a href="/friends/remove/<%= profile._id %>" class="btn btn-dark">
+    <a href="/friends/remove/<%= profile._id %>" class="btn btn-dark" id="addFriendButton">
       Remove Friend
     </a>
   <% } %>
-<table class="table table-light" id="playlistTable">
+<table class="table table-light playlistTable">
     <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>

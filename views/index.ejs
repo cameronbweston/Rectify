@@ -6,12 +6,13 @@
   <% if (user?.profile.avatar) { %>
     <div>
       <img
+      class="img-thumbnail"
         src="<%= user.profile.avatar %>" 
         alt="<%= user.profile.name %> avatar"
-        id="userImg"
       >
     </div>
   <% } %>
+  <h2 class="whiteHeaders" id="vibeHeader"><i>#Set the VIBE for your day...</i></h2>
   <form action="/playlists/create" id="artistsForm">
     <div class="mb-3">
       <label for="artist1" class="form-label">Enter your favorite artist:</label>
@@ -26,7 +27,7 @@
       <input type="text" class="form-control" name="thirdArtist" required>
     </div>
     <div class="col text-center">
-      <button type="submit" class="btn btn-primary mb-3" form="artistsForm">Submit</button>
+      <button type="submit" class="btn btn-dark mb-3" form="artistsForm">Submit</button>
     </div>
   </form>
   

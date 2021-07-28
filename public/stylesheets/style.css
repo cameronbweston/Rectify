@@ -51,6 +51,14 @@ h1 {
   width: 80em;
 }
 
+#addFriendButton{
+  margin: 1em;
+}
+
+#vibeHeader {
+margin-top: 1em;
+}
+
 #logo {
   height: 50px;
   width: 50px;
@@ -63,6 +71,7 @@ h1 {
 #userImg {
   height: 15em;
   width: 15em;
+  border: 10px double white;
   border-radius: 100%;
 }
 

@@ -7,7 +7,7 @@
   <%= console.log(`user: ${user}`) %> 
 
   <% if (userPlaylist) { %>
-    <h4>Sick of It? Delete It</h4>
+    <h4 class="whiteHeaders">Sick of It? Delete It</h4>
     <form action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">
        <button type="submit" class="btn btn-dark">Delete</button>
     </form>  
