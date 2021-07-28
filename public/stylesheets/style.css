@@ -47,6 +47,10 @@ h1 {
   font-size: 3.6rem;
 }
 
+.playlistTable {
+  width: 80em;
+}
+
 #userImg {
   height: 15em;
   width: 15em;
