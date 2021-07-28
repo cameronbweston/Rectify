@@ -73,6 +73,7 @@ function addToUserSpotify (req, res) {
 
 function showAllPlaylists(req, res) {
     Playlist.find({ savedBy: req.user.profile._id })
+    .sort( { _id: -1 })
     .then(playlists => {
         res.render('playlists/showAllPlaylists', {
             title: "My Profile",
@@ -85,6 +86,7 @@ function deletePlaylist(req, res) {
     Playlist.findByIdAndDelete(req.params.id)
     .then(( ) => {
         Playlist.find({ savedBy: req.user.profile._id })
+        .sort( { _id: -1 })
         .then(playlists => {
             res.render(`playlists/showAllPlaylists`,{
                 title: "My Profile",
@@ -103,6 +105,7 @@ function deletePlaylist(req, res) {
 function details(req, res) {
     Playlist.findById(req.params.id)
     .populate('savedBy')
+    .sort( { _id: -1 })
     .then(playlist => {
         console.log(playlist)
         console.log(req.user)
