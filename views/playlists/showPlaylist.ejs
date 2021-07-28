@@ -2,8 +2,8 @@
 <%- include('../partials/nav') %>
 
 <main>
-  <h1 class="userName">hello, <%= user ? user.profile.name : "friend" %></h1>
-  <h4 class="userName">Love it? Save it!</h4>
+  <h1 class="whiteHeaders">hello, <%= user ? user.profile.name : "friend" %></h1>
+  <h4 class="whiteHeaders">Love it? Save it!</h4>
   <form action="/playlists/AddToUserSpotify" method="POST">
     <input type="text" name="playlistName" hidden value="<%= randomPlaylistName %>"> 
     <input type="text" name="playlist" hidden value="<%= JSON.stringify(recommendedRandomPlaylist)%>"> 

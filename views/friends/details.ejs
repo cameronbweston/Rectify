@@ -2,7 +2,7 @@
 <%- include('../partials/nav') %>
 
 <main>
-  <h1><%= profile.name %></h1>
+  <h1 class="whiteHeaders"><%= profile.name %></h1>
   <% if (profile?.avatar) { %>
     <div>
       <img 
@@ -11,7 +11,7 @@
       >
     </div>
   <% } %>
-  <h1>Saved Playlists</h1>
+  <h1 class="whiteHeaders">Saved Playlists</h1>
 
   <%# This is where we'll add a button to 'friend/unfriend' a user %> 
   <%# if this is not my profile page          &&  the user being viewed is not in my friends list %> 
@@ -26,7 +26,7 @@
       Remove Friend
     </a>
   <% } %>
-<table class="table table-light">
+<table class="table table-light" id="playlistTable">
     <thead class="thead-dark">
       <tr>
         <th scope="col">#</th>
@@ -52,7 +52,7 @@
                 <td><%= playlists[index].createdAt.toLocaleDateString() %></td>
                 <td>
                     <form action="/playlists/details/<%= playlists[index]._id %> " method="GET">
-                        <button type="submit">Details</button>
+                        <button class="btn btn-dark" type="submit">Details</button>
                     </form>
                 </td>
                 <% } %>
