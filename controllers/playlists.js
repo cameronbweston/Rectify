@@ -9,7 +9,7 @@ const playlistVerbs = ['To Dance To', 'To Cry To', 'To Beat The Depression', 'To
 
 export {
     create,
-    //save,
+    save,
     details,
     deletePlaylist as delete,
     showAllPlaylists,
@@ -47,7 +47,7 @@ function addToUserSpotify (req, res) {
     .then((response) => {
         let newPlaylistId = response.data.id
         let trackURIString = ''
-        
+        console.log("step 1")
         //Build string of tracks to comply with request format
         for (let i = 0; i < trackIds.length; i++) {
             if(i == trackIds.length - 1){
@@ -58,23 +58,18 @@ function addToUserSpotify (req, res) {
                 trackURIString += '%2Cspotify%3Atrack%3A'
             }
         }
+        console.log(`step 2`)
         //Finally, we make the call to the API to add this playlist to the user profile
-        axios.post(`https://api.spotify.com/v1/playlists/${newPlaylistId}/tracks?uris=spotify%3Atrack%3A${trackURIString}`, { }, reqHeaders)
+        axios.post(`https://api.spotify.com/v1/playlists/${newPlaylistId}/tracks?uris=spotify%3Atrack%3A${trackURIString}`, {}, reqHeaders)
         .then(() => {
             //Also save it in our MongoDB so user can view what they have saved
-            let parsed = JSON.parse(originalReq.body.playlist)
-
-            originalReq.body.savedBy = originalReq.user.profile._id
-            originalReq.body.name = originalReq.body.playlistName
-            originalReq.body.songs = parsed
-            originalReq.body.spotifyId = '' 
-            //Don't need to check if it's been created, theoretically all playlists should be random and unique
-            Playlist.create(originalReq.body)
-            .then(() => {
+            console.log('step 3')
+            save(originalReq)
+                console.log('step 4')
                 res.render('index', {
                     title: "Rectify"
                 })
-            })
+
         })
     })
     .catch(err => {
@@ -128,16 +123,22 @@ function details(req, res) {
     })
 }
 
-// function save(req) {
-//     let parsed = JSON.parse(req.body.playlist)
+function save(req) {
+    let parsed = JSON.parse(req.body.playlist)
 
-//     req.body.savedBy = req.user.profile._id
-//     req.body.name = req.body.playlistName
-//     req.body.songs = parsed
-//     req.body.spotifyId = '' 
-//     //Don't need to check if it's been created, theoretically all playlists should be random and unique
-//     Playlist.create(req.body)
-// }
+    req.body.savedBy = req.user.profile._id
+    req.body.name = req.body.playlistName
+    req.body.songs = parsed
+    req.body.spotifyId = '' 
+    //Don't need to check if it's been created, theoretically all playlists should be random and unique
+    Playlist.create(req.body)
+    .then(() => {
+        return
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
 
 function create(req, res) {
     let artist1 = req.query.firstArtist
@@ -146,9 +147,6 @@ function create(req, res) {
     let numberOfTracks = req.query.numberOfTracks ? req.query.numberOfTracks : 15
     let genres = req.query.genres
     
-    let test = genres.replace('/,/g', '%2C%20')
-    console.log(req.query.genres)
-    console.log(test)
     //Format artists to comply with request format
     artist1.replace('/ /g', "%20")
     artist2.replace('/ /g', "%20")
