@@ -8,8 +8,8 @@ Rectify is a playlist *Recommender* for *Spotify* --> Rectify. I always love fin
 [Rectify](https://rectify-playlist-builder.herokuapp.com/)
 
 ## Screenshots
-![Home Page View](/screenshots/homepage.png)
-![Playlist View](/screenshots/playlistView.png)
+![Home Page View](https://github.com/cameronbweston/Rectify/blob/main/public/screenshots/homepage.png)
+![Playlist View](https://github.com/cameronbweston/Rectify/blob/main/public/screenshots/playlistView.png)
 
 ## How To Guide:
 1. Sign into your spotify account
