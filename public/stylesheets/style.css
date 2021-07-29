@@ -33,7 +33,7 @@ nav {
   background-color: white;
   font-size: 1.6rem;
   display: flex;
-  justify-content: center;
+  justify-content: left;
 }
 
 main {
@@ -64,6 +64,7 @@ margin-top: 1em;
 }
 
 #logo {
+  align-self: left;
   height: 50px;
   width: 50px;
 }
@@ -89,7 +90,7 @@ margin-top: 1em;
   font-size: 1.2em;
   background-color: white;
   margin: 1%;
-  padding: 1%;
+  padding: 2%;
   border-radius: 10px;
 }
 
@@ -109,4 +110,10 @@ margin-top: 1em;
   border-radius: 5px;
   padding: 10px;
   margin: 10px;
+}
+
+@media screen and (max-width: 600px){
+  h1 {
+    font-size: 2em;
+  }
 }
