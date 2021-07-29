@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import axios from 'axios'
 import { Playlist } from "../models/playlist.js";
-import { User } from "../models/user.js";
 
+//Random playlist names so we can add some spice to our playlist titles
 const playlistNames = ['In My Feels Playlist', 'Rad Mix Playlist', 'Chill Beats Playlist', 'Soul Soother Playlist', 'Pump Up Playlist', "Crunchy Grooves Playlist", 'Rainy Day Playlist', 'Awesome Day Playlist', 'Sad Girl Playlist', 'Happy Mood Playlist', 'Buttery Smooth Jams', 'Sonic Funk Jams']
 
 const playlistVerbs = ['To Dance To', 'To Cry To', 'To Beat The Depression', 'To Cure Anxiety', 'To Cook With', 'To Drive To', 'For the Gym', 'For Getting Over Your Ex', 'For Your Commute']
@@ -23,12 +23,12 @@ function addToUserSpotify (req, res) {
     const playlistName = req.body.playlistName
     const trackIds = []
     
-    //console.log(`user: ${req.user}`)
+    //store all songs in array so we can add them to API call
     songsToAdd.forEach(track => {
         trackIds.push(track.songId)
     })
-    //console.log(`trackIds: ${trackIds}`)
 
+    //save headers and reuse them for all API calls
     const reqHeaders = {
         headers: {
         Authorization: 'Bearer ' + process.env.ACCESS_TOKEN //the token is a variable which holds the token
