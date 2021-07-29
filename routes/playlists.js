@@ -11,7 +11,6 @@ router.get('/show', isLoggedIn, playlistCtrl.showAllPlaylists)
 router.get('/create', isLoggedIn, playlistCtrl.create)
 router.get('/details/:id', isLoggedIn, playlistCtrl.details)
 router.delete('/:id', isLoggedIn, playlistCtrl.delete)
-router.post('/savePlaylist', isLoggedIn, playlistCtrl.save)
 router.post('/addToUserSpotify', isLoggedIn, playlistCtrl.addToUserSpotify)
 
 function isLoggedIn(req, res, next) {

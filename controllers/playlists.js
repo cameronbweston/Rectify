@@ -9,7 +9,7 @@ const playlistVerbs = ['To Dance To', 'To Cry To', 'To Beat The Depression', 'To
 
 export {
     create,
-    save,
+    //save,
     details,
     deletePlaylist as delete,
     showAllPlaylists,
@@ -62,11 +62,18 @@ function addToUserSpotify (req, res) {
         axios.post(`https://api.spotify.com/v1/playlists/${newPlaylistId}/tracks?uris=spotify%3Atrack%3A${trackURIString}`, { }, reqHeaders)
         .then(() => {
             //Also save it in our MongoDB so user can view what they have saved
-            save(originalReq)
-        })
-        .then(() => {
-            res.render('index', {
-                title: "Rectify"
+            let parsed = JSON.parse(originalReq.body.playlist)
+
+            originalReq.body.savedBy = originalReq.user.profile._id
+            originalReq.body.name = originalReq.body.playlistName
+            originalReq.body.songs = parsed
+            originalReq.body.spotifyId = '' 
+            //Don't need to check if it's been created, theoretically all playlists should be random and unique
+            Playlist.create(originalReq.body)
+            .then(() => {
+                res.render('index', {
+                    title: "Rectify"
+                })
             })
         })
     })
@@ -121,16 +128,16 @@ function details(req, res) {
     })
 }
 
-function save(req) {
-    let parsed = JSON.parse(req.body.playlist)
+// function save(req) {
+//     let parsed = JSON.parse(req.body.playlist)
 
-    req.body.savedBy = req.user.profile._id
-    req.body.name = req.body.playlistName
-    req.body.songs = parsed
-    req.body.spotifyId = '' 
-    //Don't need to check if it's been created, theoretically all playlists should be random and unique
-    Playlist.create(req.body)
-}
+//     req.body.savedBy = req.user.profile._id
+//     req.body.name = req.body.playlistName
+//     req.body.songs = parsed
+//     req.body.spotifyId = '' 
+//     //Don't need to check if it's been created, theoretically all playlists should be random and unique
+//     Playlist.create(req.body)
+// }
 
 function create(req, res) {
     let artist1 = req.query.firstArtist
