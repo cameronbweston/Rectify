@@ -6,13 +6,13 @@
   <%= console.log(`playlist saved by: ${playlist.savedBy}`) %> 
   <%= console.log(`user: ${user}`) %> 
 
+  <h2 class="playlistName"><%= playlist.name %></h2>
   <% if (userPlaylist) { %>
-    <h4 class="whiteHeaders">Sick of It? Delete It</h4>
+    <h4 class="whiteHeaders saveIt">Sick of It? Delete It</h4>
     <form action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">
-       <button type="submit" class="btn btn-dark">Delete</button>
+       <button type="submit" class="btn btn-dark" id="addPlaylistButton">Delete</button>
     </form>  
   <% } %>
-  <h2 class="whiteHeaders vibeHeader"><%= playlist.name %></h2>
   <ul class="list-group">
       <% playlist.songs.forEach(song => { %>
         <li class="list-group-item songRow"><img  class="albumArt" src="<%= song.mediumImage %>" alt=""><span >&#8193</span><%= song.name %> - <%= song.artist %> </li>

@@ -48,7 +48,8 @@ h1 {
 }
 
 .playlistTable {
-  width: 80%;
+  margin-top: 2%;
+  width: 90%;
 }
 
 #playlistSubmitButton {
@@ -111,34 +112,43 @@ margin-top: 1em;
 
 @media screen and (max-width: 600px){
   h1 {
-    font-size: 2em;
+  font-size: 2em;
   }
   #userImg {
-    height: 12em;
-    width: 10em;
+  height: 12em;
+  width: 10em;
   }
   .titleHeader {
-    margin-top: 1em;
-    font-size: 1.2em;
-    }
+  margin-top: 1em;
+  font-size: 1.2em;
+  }
   #artistsForm {
-      width: 80%;
-      padding: 5%;
-    }
-    .playlistName {
-      font-size: 1em;
-      background-color: white;
-      border-radius: 5px;
-      padding: 10px;
-      margin: 10px;
-    }
-    .saveIt {
-      font-size: 1em;
-    }
-    .songRow {
-      align-self: center;
-      width: 90%;
-      font-size: 16px;
-      margin: 0;
-    }
+    width: 80%;
+    padding: 5%;
+  }
+  #addPlaylistButton {
+    font-size: 0.8em;
+  }
+  .playlistName {
+    font-size: 1.2em;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+  }
+  .saveIt {
+    font-size: 1em;
+  }
+  .songRow {
+    align-self: center;
+    width: 90%;
+    font-size: 16px;
+    margin: 0;
+  }
+  .playlistTable {
+    font-size: 0.8em;
+  }
+  #detailsButton {
+    font-size: 0.8em;
+  }
 }

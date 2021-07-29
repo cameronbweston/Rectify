@@ -30,7 +30,7 @@
                 <td><%= playlists[index].createdAt.toLocaleDateString() %></td>
                 <td>
                     <form action="/playlists/details/<%= playlists[index]._id %> " method="GET">
-                    <button class="btn btn-dark" type="submit">Details</button>
+                    <button class="btn btn-dark" type="submit" id="detailsButton">Details</button>
                     </form>
                 </td>
                 <% } %>
