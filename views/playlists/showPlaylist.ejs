@@ -3,11 +3,11 @@
 
 <main>
   <h2 class="playlistName"><%= randomPlaylistName %></h2>
-  <h4 class="whiteHeaders">Love it? Save it!</h4>
+  <h4 class="whiteHeaders saveIt">Love it? Save it!</h4>
   <form action="/playlists/AddToUserSpotify" method="POST">
     <input type="text" name="playlistName" hidden value="<%= randomPlaylistName %>"> 
     <input type="text" name="playlist" hidden value="<%= JSON.stringify(recommendedRandomPlaylist)%>"> 
-      <button class="btn btn-dark">+ Add to Spotify</button>
+      <button class="btn btn-dark" id="addPlaylistButton">+ Add to Spotify</button>
   </form>
   <ul class="list-group">
       <% recommendedRandomPlaylist.forEach(song => { %>

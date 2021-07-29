@@ -133,16 +133,16 @@ function create(req, res) {
     let artist2 = req.query.secondArtist
     let artist3 = req.query.thirdArtist
     let numberOfTracks = req.query.numberOfTracks ? req.query.numberOfTracks : 15
-    let genreBody = ''
-    console.log(req.query.genres)
+    // let genreBody = ''
+    // console.log(req.query.genres)
 
-    if(req.query.genres) {
-        //genres.replace('/ /g', '%20')
-        req.query.genres.replace('/,/g', '%2C%20')
+    // if(req.query.genres) {
+    //     //genres.replace('/ /g', '%20')
+    //     req.query.genres.replace('/,/g', '%2C%20')
     
-        genreBody = '&seed_genres=' + req.query.genres
-    }
-    console.log(`genres: ${genreBody}`)
+    //     genreBody = '&seed_genres=' + req.query.genres
+    // }
+    // console.log(`genres: ${genreBody}`)
 
     artist1.replace('/ /g', "%20")
     artist2.replace('/ /g', "%20")
@@ -169,7 +169,7 @@ function create(req, res) {
         return artistIds
     }))
     .then((artistIds) => {
-        axios.get(`https://api.spotify.com/v1/recommendations?limit=${numberOfTracks}&market=ES&seed_artists=${artistIds[0]}%2C${artistIds[1]}%2C${artistIds[2]}${genres}`, reqHeaders)
+        axios.get(`https://api.spotify.com/v1/recommendations?limit=${numberOfTracks}&market=ES&seed_artists=${artistIds[0]}%2C${artistIds[1]}%2C${artistIds[2]}`, reqHeaders)
         .then(listOfTracks => {
             //console.log(listOfTracks.data.tracks)
 

@@ -73,11 +73,8 @@ margin-top: 1em;
   color: white;
 }
 
-#userImg {
-  height: 15em;
-  width: 15em;
-  border: 10px double white;
-  border-radius: 100%;
+#addPlaylistButton{
+  margin-bottom: 1em;
 }
 
 #spotifyButton {
@@ -116,4 +113,32 @@ margin-top: 1em;
   h1 {
     font-size: 2em;
   }
+  #userImg {
+    height: 12em;
+    width: 10em;
+  }
+  .titleHeader {
+    margin-top: 1em;
+    font-size: 1.2em;
+    }
+  #artistsForm {
+      width: 80%;
+      padding: 5%;
+    }
+    .playlistName {
+      font-size: 1em;
+      background-color: white;
+      border-radius: 5px;
+      padding: 10px;
+      margin: 10px;
+    }
+    .saveIt {
+      font-size: 1em;
+    }
+    .songRow {
+      align-self: center;
+      width: 90%;
+      font-size: 16px;
+      margin: 0;
+    }
 }
