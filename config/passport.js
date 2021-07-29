@@ -22,7 +22,7 @@ passport.use(
           return done(null, user)
         } else {
             let getAvatar;
-            if(profile._json.images[0].url != null) {
+            if(profile._json?.images[0]?.url != null) {
               getAvatar = profile._json.images[0].url
             }
             else {
