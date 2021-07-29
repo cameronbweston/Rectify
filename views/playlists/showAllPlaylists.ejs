@@ -5,7 +5,7 @@
 <main>
 <h1 class="whiteHeaders titleHeader">My Playlists</h1>
 <table class="table table-light playlistTable">
-    <thead class="thead-dark playlistTable">
+    <thead class="thead-light playlistTable">
       <tr>
         <th scope="col">#</th>
         <th scope="col">Playlist Name</th>
@@ -30,7 +30,7 @@
                 <td><%= playlists[index].createdAt.toLocaleDateString() %></td>
                 <td>
                     <form action="/playlists/details/<%= playlists[index]._id %> " method="GET">
-                    <button class="btn btn-dark" type="submit" id="detailsButton">Details</button>
+                    <button class="btn btn-info" type="submit" id="detailsButton">Details</button>
                     </form>
                 </td>
                 <% } %>

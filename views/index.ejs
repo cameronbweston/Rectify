@@ -13,7 +13,7 @@
     </div>
   <% } %>
   <h2 class="whiteHeaders titleHeader"><i>Set the #VIBE for your day...</i></h2>
-  <form action="/playlists/create" id="artistsForm">
+  <form action="/playlists/create" id="artistsForm" method="GET">
     <div class="mb-3">
       <label for="artist1" class="form-label">Enter your favorite artist:</label>
       <input type="text" class="form-control" name="firstArtist" required>
@@ -32,12 +32,12 @@
         <input type="text" name="numberOfTracks" placeholder="optional">
       </div>
       <div class="col-md-auto">
-        <label class="form-label">Genre:</label><br>
+        <label for="genres" class="form-label">Genre:</label><br>
         <input type="text" name="genres" placeholder="optional">
       </div>
     </div>
     <div class="col text-center">
-      <button type="submit" class="btn btn-dark" form="artistsForm" id="playlistSubmitButton">Submit</button>
+      <button type="submit" class="btn btn-info" form="artistsForm" id="playlistSubmitButton">Submit</button>
     </div>
   </form>
   

@@ -16,7 +16,6 @@ passport.use(
       process.env.ACCESS_TOKEN = accessToken
       process.env.REFRESH_TOKEN = refreshToken
       //console.log(`access token: ${process.env.ACCESS_TOKEN} refresh token: ${process.env.REFRESH_TOKEN}`)
-      console.log(profile)
       User.findOne({ spotifyId: profile.id }, function (err, user) {
         if (err) return done(err)
         if (user) {

@@ -35,17 +35,20 @@ function addToUserSpotify (req, res) {
         }
     }
 
+    //Create body of url 
     const makePlaylistBody = {
         "name": "Rectify - " + playlistName,
         "description": "Your recommended songs from Rectify",
         "public": false
     }
 
+    //Make call to create a blank playlist
     axios.post(`https://api.spotify.com/v1/users/${spotifyId}/playlists`, makePlaylistBody, reqHeaders)
     .then((response) => {
         let newPlaylistId = response.data.id
         let trackURIString = ''
         
+        //Build string of tracks to comply with request format
         for (let i = 0; i < trackIds.length; i++) {
             if(i == trackIds.length - 1){
                 trackURIString += trackIds[i]
@@ -55,9 +58,10 @@ function addToUserSpotify (req, res) {
                 trackURIString += '%2Cspotify%3Atrack%3A'
             }
         }
-        console.log(`body url: ${trackURIString}`)
+        //Finally, we make the call to the API to add this playlist to the user profile
         axios.post(`https://api.spotify.com/v1/playlists/${newPlaylistId}/tracks?uris=spotify%3Atrack%3A${trackURIString}`, { }, reqHeaders)
         .then(() => {
+            //Also save it in our MongoDB so user can view what they have saved
             save(originalReq)
         })
         .then(() => {
@@ -124,7 +128,7 @@ function save(req) {
     req.body.name = req.body.playlistName
     req.body.songs = parsed
     req.body.spotifyId = '' 
-
+    //Don't need to check if it's been created, theoretically all playlists should be random and unique
     Playlist.create(req.body)
 }
 
@@ -133,17 +137,12 @@ function create(req, res) {
     let artist2 = req.query.secondArtist
     let artist3 = req.query.thirdArtist
     let numberOfTracks = req.query.numberOfTracks ? req.query.numberOfTracks : 15
-    // let genreBody = ''
-    // console.log(req.query.genres)
-
-    // if(req.query.genres) {
-    //     //genres.replace('/ /g', '%20')
-    //     req.query.genres.replace('/,/g', '%2C%20')
+    let genres = req.query.genres
     
-    //     genreBody = '&seed_genres=' + req.query.genres
-    // }
-    // console.log(`genres: ${genreBody}`)
-
+    let test = genres.replace('/,/g', '%2C%20')
+    console.log(req.query.genres)
+    console.log(test)
+    //Format artists to comply with request format
     artist1.replace('/ /g', "%20")
     artist2.replace('/ /g', "%20")
     artist3.replace('/ /g', "%20")
@@ -153,35 +152,28 @@ function create(req, res) {
         Authorization: 'Bearer ' + process.env.ACCESS_TOKEN //the token is a variable which holds the token
         }
     }
+    //Get the 3 artists ids so we can build playlist with them
     axios.all([
         axios.get(`https://api.spotify.com/v1/search?q=${artist1}&type=artist`, reqHeaders),
         axios.get(`https://api.spotify.com/v1/search?q=${artist2}&type=artist`, reqHeaders),
         axios.get(`https://api.spotify.com/v1/search?q=${artist3}&type=artist`, reqHeaders)
     ])
     .then(axios.spread((...responses) => {
-        // console.log(responses[0].data.artists.items[0].id)
-        // console.log(responses[1].data.artists.items[0].id)
-        // console.log(responses[2].data.artists.items[0].id)
         const artistIds =[]
-
+        //Add these artist ids to our array
         artistIds.push(responses[0].data.artists.items[0].id, responses[1].data.artists.items[0].id, responses[2].data.artists.items[0].id)
         
         return artistIds
     }))
     .then((artistIds) => {
+        //Finally, we get our randomized playlists with all of the variables the user has entered in our form...
         axios.get(`https://api.spotify.com/v1/recommendations?limit=${numberOfTracks}&market=ES&seed_artists=${artistIds[0]}%2C${artistIds[1]}%2C${artistIds[2]}`, reqHeaders)
         .then(listOfTracks => {
-            //console.log(listOfTracks.data.tracks)
-
             //Store our 10 song objects
             const recommendedRandomPlaylist = []
 
             listOfTracks.data.tracks.forEach(track => {
-                // console.log(track.id)
-                // console.log(`image url: ${track.album.images[0].url}`)
-                // console.log(track.album.artists[0].name)
-                // console.log(track.name)
-                
+                //Create song objects for each of our tracks and store them in our playlist array
                 let song = {
                     songId: track.id,
                     name: track.name,
@@ -193,8 +185,6 @@ function create(req, res) {
             return recommendedRandomPlaylist
         })
         .then(recommendedRandomPlaylist => {
-            //console.log(recommendedRandomPlaylist)
-
             //Generate a rad playlist name
             const randomPlaylistName = playlistNames[Math.floor(Math.random()*playlistNames.length)] + " " + playlistVerbs[Math.floor(Math.random()*playlistVerbs.length)]
 
@@ -207,7 +197,6 @@ function create(req, res) {
     })
     .catch(err => {
         console.log(err)
-        //res.redirect('/')
     })
 
 }
