@@ -120,7 +120,6 @@ function details(req, res) {
 function save(req) {
     let parsed = JSON.parse(req.body.playlist)
 
-    // Add id of the logged in user to req.body for creating a game for the first time (if it doesn't exist in the database)
     req.body.savedBy = req.user.profile._id
     req.body.name = req.body.playlistName
     req.body.songs = parsed
@@ -130,11 +129,20 @@ function save(req) {
 }
 
 function create(req, res) {
-    console.log(req.query.firstArtist)
     let artist1 = req.query.firstArtist
     let artist2 = req.query.secondArtist
     let artist3 = req.query.thirdArtist
     let numberOfTracks = req.query.numberOfTracks ? req.query.numberOfTracks : 15
+    let genreBody = ''
+    console.log(req.query.genres)
+
+    if(req.query.genres) {
+        //genres.replace('/ /g', '%20')
+        req.query.genres.replace('/,/g', '%2C%20')
+    
+        genreBody = '&seed_genres=' + req.query.genres
+    }
+    console.log(`genres: ${genreBody}`)
 
     artist1.replace('/ /g', "%20")
     artist2.replace('/ /g', "%20")
@@ -161,7 +169,7 @@ function create(req, res) {
         return artistIds
     }))
     .then((artistIds) => {
-        axios.get(`https://api.spotify.com/v1/recommendations?limit=${numberOfTracks}&market=ES&seed_artists=${artistIds[0]}%2C${artistIds[1]}%2C${artistIds[2]}`, reqHeaders)
+        axios.get(`https://api.spotify.com/v1/recommendations?limit=${numberOfTracks}&market=ES&seed_artists=${artistIds[0]}%2C${artistIds[1]}%2C${artistIds[2]}${genres}`, reqHeaders)
         .then(listOfTracks => {
             //console.log(listOfTracks.data.tracks)
 

@@ -16,15 +16,22 @@ passport.use(
       process.env.ACCESS_TOKEN = accessToken
       process.env.REFRESH_TOKEN = refreshToken
       //console.log(`access token: ${process.env.ACCESS_TOKEN} refresh token: ${process.env.REFRESH_TOKEN}`)
-
+      console.log(profile)
       User.findOne({ spotifyId: profile.id }, function (err, user) {
         if (err) return done(err)
         if (user) {
           return done(null, user)
         } else {
-          const newProfile = new Profile({
-            name: profile._json.display_name,
-            avatar: profile._json.images[0].url,
+            let getAvatar;
+            if(profile._json.images[0].url != null) {
+              getAvatar = profile._json.images[0].url
+            }
+            else {
+              getAvatar = '/images/placeholderAvatar.png'
+            }
+            const newProfile = new Profile({
+              name: profile._json.display_name,
+              avatar: getAvatar,
           })
           //console.log(profile)
           const newUser = new User({
