@@ -7,6 +7,10 @@ Rectify is a playlist *Recommender* for *Spotify* --> Rectify. I always love fin
 ## Deployed App
 [Rectify](https://rectify-playlist-builder.herokuapp.com/)
 
+##Screenshots
+![Home Page View](/public/screenshots/homepage.png)
+![Playlist View](/public/screenshots/playlistView.png)
+
 ## How To Guide:
 1. Sign into your spotify account
 2. Enter 3 artists into the home page form
