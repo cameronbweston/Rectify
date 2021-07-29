@@ -10,6 +10,8 @@ Rectify is a playlist *Recommender* for *Spotify* --> Rectify. I always love fin
 ## Screenshots
 ![Home Page View](https://github.com/cameronbweston/Rectify/blob/main/public/screenshots/homepage.png)
 ![Playlist View](https://github.com/cameronbweston/Rectify/blob/main/public/screenshots/playlistView.png)
+![Wireframe](https://github.com/cameronbweston/Rectify/blob/main/public/screenshots/wireframe.png)
+![ERD](https://github.com/cameronbweston/Rectify/blob/main/public/screenshots/erd.png)
 
 ## How To Guide:
 1. Sign into your spotify account

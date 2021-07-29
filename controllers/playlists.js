@@ -62,7 +62,7 @@ function addToUserSpotify (req, res) {
         })
         .then(() => {
             res.render('index', {
-                title: "Home Page"
+                title: "Rectify"
             })
         })
     })
