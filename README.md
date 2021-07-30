@@ -2,7 +2,7 @@
 Sick of listening to the same songs over and over? Let's Rectify that.
 
 ## Objective 
-Rectify is a playlist *Recommender* for *Spotify* --> Rectify. I always love finding and listening to new music. However, most of the time I feel like my Spotify Daily Mixes and recommended playlists are a lot of the same stuff that I listen to over and over. Also, taking time out of my day to create playlists and find new things on my own gets tedious, time consuming,  and I never know where to start. I thought it would be cool if I had more control over my recommended playlists, so I created something that did that by utilizing the Spotify API.
+Rectify is a playlist *Recommender* for *Spotify* --> Rectify. I always love finding and listening to new music. However, most of the time I feel like my Spotify Daily Mixes and recommended playlists are a lot of the same stuff that I listen to over and over. Also, taking time out of my day to create playlists and find new things on my own gets tedious, time consuming,  and I never know where to start. I thought it would be cool if I had more control over my recommended playlists, so I created something that did that by utilizing the Spotify API. Want to create a playlist of 100 brand new songs before you step out the door for the day?!?! You can do that in 15 seconds with Rectify.
 
 ## Trello Board
 [Trello](https://trello.com/b/MgP8ipPW/rectify-get-new-spotify-playlists-based-on-your-fav-artists)
