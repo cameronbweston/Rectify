@@ -47,7 +47,6 @@ function addToUserSpotify (req, res) {
     .then((response) => {
         let newPlaylistId = response.data.id
         let trackURIString = ''
-        console.log("step 1")
         //Build string of tracks to comply with request format
         for (let i = 0; i < trackIds.length; i++) {
             if(i == trackIds.length - 1){
@@ -58,14 +57,11 @@ function addToUserSpotify (req, res) {
                 trackURIString += '%2Cspotify%3Atrack%3A'
             }
         }
-        console.log(`step 2`)
         //Finally, we make the call to the API to add this playlist to the user profile
         axios.post(`https://api.spotify.com/v1/playlists/${newPlaylistId}/tracks?uris=spotify%3Atrack%3A${trackURIString}`, {}, reqHeaders)
         .then(() => {
             //Also save it in our MongoDB so user can view what they have saved
-            console.log('step 3')
             save(originalReq)
-                console.log('step 4')
                 res.render('index', {
                     title: "Rectify"
                 })
