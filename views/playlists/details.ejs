@@ -10,7 +10,7 @@
   <% if (userPlaylist) { %>
     <h4 class="whiteHeaders saveIt">Sick of It? Delete It</h4>
     <form action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">
-       <button type="submit" class="btn btn-dark" id="addPlaylistButton">Delete</button>
+       <button type="submit" class="btn btn-info" id="addPlaylistButton">Delete</button>
     </form>  
   <% } %>
   <ul class="list-group">
