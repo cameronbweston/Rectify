@@ -2,7 +2,7 @@
 Sick of listening to the same songs over and over? Rectify it.
 
 ## Objective 
-Rectify is a playlist *Recommender* for *Spotify* --> Rectify. I always love finding new and listening to new music. However, most of the time I feel like my Spotify Daily Mixes and recommended playlists are a lot of the same stuff that I listen to over and over. Also, taking time out of my day to create playlists and find new things on my own gets tedious, time consuming,  and I never know where to start. I thought it would be cool if I had more control over my recommended playlists, so I created something that did that by utilizing the Spotify API.
+Rectify is a playlist *Recommender* for *Spotify* --> Rectify. I always love finding and listening to new music. However, most of the time I feel like my Spotify Daily Mixes and recommended playlists are a lot of the same stuff that I listen to over and over. Also, taking time out of my day to create playlists and find new things on my own gets tedious, time consuming,  and I never know where to start. I thought it would be cool if I had more control over my recommended playlists, so I created something that did that by utilizing the Spotify API.
 
 ## Deployed App
 [Rectify](https://rectify-playlist-builder.herokuapp.com/)
@@ -13,7 +13,7 @@ Rectify is a playlist *Recommender* for *Spotify* --> Rectify. I always love fin
 ![Wireframe](https://github.com/cameronbweston/Rectify/blob/main/public/screenshots/wireframe.png)
 ![ERD](https://github.com/cameronbweston/Rectify/blob/main/public/screenshots/erd.png)
 
-## How To Guide:
+## How-To Guide:
 1. Sign into your spotify account
 2. Enter 3 artists into the home page form
 3. Enter the number of tracks to customize your playlist length
